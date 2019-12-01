@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace IntervieweeProject
 {
+    // Read through all the requirements and reached the second page
     public class Startup
     {
         public Startup(IConfiguration configuration)
