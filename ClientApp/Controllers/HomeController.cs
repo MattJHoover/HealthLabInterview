@@ -14,9 +14,11 @@ namespace ClientApp.Controllers
     public class HomeController : Controller
     {
         private readonly IForecastAccess _forecastAccess;
-        public HomeController(IForecastAccess forecastAccess)
+        private readonly IPatientAccess _PatientAccess;
+        public HomeController(IForecastAccess forecastAccess, IPatientAccess patientAccess)
         {
             _forecastAccess = forecastAccess;
+            _PatientAccess = patientAccess;
         }
 
         [HttpGet]
@@ -26,10 +28,10 @@ namespace ClientApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string zipcode)
+        public IActionResult Index(string clinic)
         {
             // If we were saving anything to the database this is where we would call the manager to do so.
-            return RedirectToAction("WeatherReport", new { zipcode });
+            return RedirectToAction("Questionnaires", new { clinic });
         }
 
         [HttpGet]
@@ -57,6 +59,19 @@ namespace ClientApp.Controllers
             {
                 toRet.TemperatureClass = "warm";
             }
+
+            return View(toRet);
+        }
+
+        public async Task<IActionResult> Questionnaires(string clinic)
+        {
+            PatientQuestionnaire questionnaire = await _PatientAccess.GetQuestionnairesForClinic(clinic);
+            PatientQuestionnaireViewModel toRet = new PatientQuestionnaireViewModel()
+            {
+                Name = questionnaire.Name,
+                Description = questionnaire.Summary,
+                Clinic = questionnaire.Clinic
+            };
 
             return View(toRet);
         }

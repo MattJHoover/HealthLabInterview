@@ -11,6 +11,8 @@ namespace API.Configuration
     {
         public DbSet<WeatherForecast> Forecasts { get; set; }
 
+        public DbSet<PatientQuestionnaire> Questionnaires { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=api.db");
     }

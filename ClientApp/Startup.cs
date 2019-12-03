@@ -29,6 +29,7 @@ namespace ClientApp
             services.AddHttpClient();
 
             services.AddTransient<IForecastAccess, ForecastAccess>();
+            services.AddTransient<IPatientAccess, PatientAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

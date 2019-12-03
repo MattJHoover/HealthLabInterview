@@ -37,6 +37,7 @@ namespace IntervieweeProject
             });
 
             services.AddTransient<IWeatherAccess, WeatherAccess>();
+            services.AddTransient<IQuestionnaireAccess, QuestionnaireAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
